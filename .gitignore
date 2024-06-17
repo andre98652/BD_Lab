@@ -1,0 +1,39 @@
+# Entorno virtual
+env/
+
+# Archivos compilados de Python
+*.pyc
+__pycache__/
+
+# Configuración del entorno
+.env
+
+# Archivos y directorios de base de datos
+*.sqlite3
+
+# Archivos de configuración del editor
+.vscode/
+
+# Archivos de log
+*.log
+
+# Archivos de cobertura de pruebas
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Archivos estáticos compilados
+staticfiles/
+
+# Archivos de migración de Django
+*/migrations/
+
+# Archivos de media subidos por el usuario
+media/
+
+# Otros archivos que no deseas rastrear
