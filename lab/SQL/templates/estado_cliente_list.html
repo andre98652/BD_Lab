@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Estados de Cliente</h2>
+<div class="btn-group" role="group">
+    <a class="btn btn-primary" href="{% url 'cliente_list' %}">Lista de Clientes</a>
+    <a class="btn btn-secondary" href="{% url 'estado_cliente_list' %}">Estados de Cliente</a>
+    <a class="btn btn-secondary" href="{% url 'tipo_cliente_list' %}">Tipos de Cliente</a>
+</div>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Estado de Registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for estado in estados %}
+        <tr>
+            <td>{{ estado.EstCliCod }}</td>
+            <td>{{ estado.EstCliNom }}</td>
+            <td>{{ estado.EstCliEstReg.EstRegNom }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-sm" href="{% url 'estado_cliente_edit' estado.EstCliCod %}">Modificar</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'estado_cliente_delete' estado.EstCliCod %}">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'estado_cliente_add' %}">Adicionar</a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Etapas de Proyecto</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Tiempo Estimado</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for etapa in etapas %}
+        <tr>
+            <td>{{ etapa.EtaProCod }}</td>
+            <td>{{ etapa.EtaProNom }}</td>
+            <td>{{ etapa.EtaProTieEst }}</td>
+            <td>{{ etapa.EtaProEstReg.EstRegNom }}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'etapas_proyecto_edit' etapa.pk %}">Modificar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'etapas_proyecto_delete' etapa.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'etapas_proyecto_add' %}">Adicionar</a>
+{% endblock %}

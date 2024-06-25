@@ -2,13 +2,19 @@
 
 {% block content %}
 <h2 class="mb-4">Clientes</h2>
-<table class="table table-striped">
+<div class="btn-group" role="group">
+    <a class="btn btn-primary" href="{% url 'cliente_list' %}">Lista de Clientes</a>
+    <a class="btn btn-secondary" href="{% url 'estado_cliente_list' %}">Estados de Cliente</a>
+    <a class="btn btn-secondary" href="{% url 'tipo_cliente_list' %}">Tipos de Cliente</a>
+</div>
+<table class="table table-striped mt-4">
     <thead>
         <tr>
             <th>Código</th>
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Estado</th>
+            <th>Fecha de Ingreso</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -19,9 +25,19 @@
             <td>{{ cliente.CliNom }}</td>
             <td>{{ cliente.CliTip.TipCliNom }}</td>
             <td>{{ cliente.CliEst.EstCliNom }}</td>
+            <td>{{ cliente.CliFecIng }}</td>
             <td>
-                <a class="btn btn-primary btn-sm" href="{% url 'cliente_edit' cliente.pk %}">Modificar</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-sm" href="{% url 'cliente_edit' cliente.pk %}">Modificar</a>
+                    <a class="btn btn-warning btn-sm" href="{% url 'toggle_cliente_status' cliente.pk %}">
+                        {% if cliente.CliEst.EstCliNom == 'Activo' %}
+                            Inactivar
+                        {% else %}
+                            Activar
+                        {% endif %}
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
+                </div>
             </td>
         </tr>
         {% endfor %}

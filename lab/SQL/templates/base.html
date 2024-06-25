@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Laboratorio</title>
+    <title>Sistema de Gestión de Proyectos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -8,6 +9,23 @@
         }
         .container {
             max-width: 800px;
+        }
+        .navigation {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .navigation a {
+            margin-right: 10px;
+        }
+        .centered-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
         footer {
             margin-top: 20px;
@@ -17,18 +35,19 @@
 <body>
     <div class="container">
         <header class="mb-4">
-            <h1 class="text-center">Sistema de Gestión de Clientes</h1>
+            <h1 class="text-center">Sistema de Gestión de Proyectos</h1>
         </header>
-        <nav class="mb-4">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cliente_list' %}">Clientes</a>
-                </li>
-            </ul>
+        <nav class="navigation">
+            <a class="btn btn-secondary" href="{% url 'gestion_clientes' %}">Clientes</a>
+            <a class="btn btn-secondary" href="{% url 'gestion_personal' %}">Personal</a>
+            <a class="btn btn-secondary" href="{% url 'gestion_actividades' %}">Actividades</a>
+            <a class="btn btn-secondary" href="#">Proyecto</a>
         </nav>
         <main>
-            {% block content %}
-            {% endblock %}
+            <div class="centered-box">
+                {% block content %}
+                {% endblock %}
+            </div>
         </main>
         <footer class="text-center">
             <p>© 2024 Laboratorio de Base de Datos</p>

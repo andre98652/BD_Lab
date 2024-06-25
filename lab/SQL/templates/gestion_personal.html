@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Gestión de Personal</h2>
+<div class="btn-group" role="group">
+    <a class="btn btn-primary" href="{% url 'personal_list' %}">Lista de Personal</a>
+    <a class="btn btn-secondary" href="{% url 'cargo_personal_list' %}">Cargos de Personal</a>
+</div>
+{% endblock %}

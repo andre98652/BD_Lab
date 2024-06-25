@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Gestión de Actividades</h2>
+<nav class="navigation">
+    <a class="btn btn-secondary" href="{% url 'actividad_list' %}">Lista de Actividades</a>
+    <a class="btn btn-secondary" href="{% url 'etapas_proyecto_list' %}">Etapas de Proyecto</a>
+    <a class="btn btn-secondary" href="{% url 'tiempos_reales_list' %}">Tiempos Reales</a>
+    <a class="btn btn-secondary" href="{% url 'plantilla_actividades_list' %}">Plantillas de Actividades</a>
+</nav>
+{% endblock %}

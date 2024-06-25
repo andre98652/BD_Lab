@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Tiempos Reales</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Actividad</th>
+            <th>Tiempo Real</th>
+            <th>Comentarios</th>
+            <th>Fecha de Registro</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tiempo in tiempos %}
+        <tr>
+            <td>{{ tiempo.TieReaCod }}</td>
+            <td>{{ tiempo.TieReaCodAct.ActNom }}</td>
+            <td>{{ tiempo.TieReaAct }}</td>
+            <td>{{ tiempo.TieReaComAju }}</td>
+            <td>{{ tiempo.TieReaFecReg }}</td>
+            <td>{{ tiempo.TieReaEstReg.EstRegNom }}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'tiempos_reales_edit' tiempo.pk %}">Modificar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'tiempos_reales_delete' tiempo.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'tiempos_reales_add' %}">Adicionar</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Gestión de Clientes</h2>
+<div class="btn-group" role="group">
+    <a class="btn btn-primary" href="{% url 'cliente_list' %}">Lista de Clientes</a>
+    <a class="btn btn-secondary" href="{% url 'estado_cliente_list' %}">Estados de Cliente</a>
+    <a class="btn btn-secondary" href="{% url 'tipo_cliente_list' %}">Tipos de Cliente</a>
+</div>
+{% endblock %}

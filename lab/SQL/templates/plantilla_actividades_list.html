@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Plantillas de Actividades</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo de Proyecto</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plantilla in plantillas %}
+        <tr>
+            <td>{{ plantilla.PlaActCod }}</td>
+            <td>{{ plantilla.PlaActNom }}</td>
+            <td>{{ plantilla.PlaActDes }}</td>
+            <td>{{ plantilla.PlaActTipProCod.TipProNom }}</td>
+            <td>{{ plantilla.PlaActEstReg.EstRegNom }}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'plantilla_actividades_edit' plantilla.pk %}">Modificar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'plantilla_actividades_delete' plantilla.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'plantilla_actividades_add' %}">Adicionar</a>
+{% endblock %}

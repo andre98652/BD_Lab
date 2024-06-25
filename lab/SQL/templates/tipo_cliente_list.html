@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Tipos de Cliente</h2>
+<div class="btn-group" role="group">
+    <a class="btn btn-primary" href="{% url 'cliente_list' %}">Lista de Clientes</a>
+    <a class="btn btn-secondary" href="{% url 'estado_cliente_list' %}">Estados de Cliente</a>
+    <a class="btn btn-secondary" href="{% url 'tipo_cliente_list' %}">Tipos de Cliente</a>
+</div>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Estado de Registro</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tipo in tipos %}
+        <tr>
+            <td>{{ tipo.TipCliCod }}</td>
+            <td>{{ tipo.TipCliNom }}</td>
+            <td>{{ tipo.TipCliEstReg.EstRegNom }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-sm" href="{% url 'tipo_cliente_edit' tipo.TipCliCod %}">Modificar</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'tipo_cliente_delete' tipo.TipCliCod %}">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'tipo_cliente_add' %}">Adicionar</a>
+{% endblock %}

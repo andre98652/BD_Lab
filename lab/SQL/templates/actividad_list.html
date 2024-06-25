@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Actividades</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tiempo Estimado</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for actividad in actividades %}
+        <tr>
+            <td>{{ actividad.ActCod }}</td>
+            <td>{{ actividad.ActNom }}</td>
+            <td>{{ actividad.ActDes }}</td>
+            <td>{{ actividad.ActTieEst }}</td>
+            <td>{{ actividad.ActEstReg.EstRegNom }}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'actividad_edit' actividad.pk %}">Modificar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'actividad_delete' actividad.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-success" href="{% url 'actividad_add' %}">Adicionar</a>
+{% endblock %}
