@@ -1,33 +1,44 @@
-{% extends "base.html" %}
+{% extends "gestion_actividades.html" %}
 
-{% block content %}
+{% block gestion_actividades_content %}
 <h2 class="mb-4">Actividades</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Tiempo Estimado</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for actividad in actividades %}
-        <tr>
-            <td>{{ actividad.ActCod }}</td>
-            <td>{{ actividad.ActNom }}</td>
-            <td>{{ actividad.ActDes }}</td>
-            <td>{{ actividad.ActTieEst }}</td>
-            <td>{{ actividad.ActEstReg.EstRegNom }}</td>
-            <td>
-                <a class="btn btn-primary btn-sm" href="{% url 'actividad_edit' actividad.pk %}">Modificar</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'actividad_delete' actividad.pk %}">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="scrollable-table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Tiempo Estimado</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for actividad in actividades %}
+            <tr>
+                <td>{{ actividad.ActCod }}</td>
+                <td>{{ actividad.ActNom }}</td>
+                <td>{{ actividad.ActDes }}</td>
+                <td>{{ actividad.ActTieEst }}</td>
+                <td>{{ actividad.ActEstReg.EstRegNom }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" href="{% url 'actividad_edit' actividad.pk %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'actividad_delete' actividad.pk %}">Eliminar</a>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'toggle_actividad_status' actividad.pk %}">
+                            {% if actividad.ActEstReg.EstRegNom == 'Activo' %}
+                                Inactivar
+                            {% else %}
+                                Activar
+                            {% endif %}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <a class="btn btn-success" href="{% url 'actividad_add' %}">Adicionar</a>
 {% endblock %}

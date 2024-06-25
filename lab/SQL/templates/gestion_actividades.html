@@ -8,4 +8,8 @@
     <a class="btn btn-secondary" href="{% url 'tiempos_reales_list' %}">Tiempos Reales</a>
     <a class="btn btn-secondary" href="{% url 'plantilla_actividades_list' %}">Plantillas de Actividades</a>
 </nav>
+<div class="centered-box">
+    {% block gestion_actividades_content %}
+    {% endblock %}
+</div>
 {% endblock %}

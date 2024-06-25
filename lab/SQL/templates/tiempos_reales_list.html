@@ -1,35 +1,46 @@
-{% extends "base.html" %}
+{% extends "gestion_actividades.html" %}
 
-{% block content %}
+{% block gestion_actividades_content %}
 <h2 class="mb-4">Tiempos Reales</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Actividad</th>
-            <th>Tiempo Real</th>
-            <th>Comentarios</th>
-            <th>Fecha de Registro</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for tiempo in tiempos %}
-        <tr>
-            <td>{{ tiempo.TieReaCod }}</td>
-            <td>{{ tiempo.TieReaCodAct.ActNom }}</td>
-            <td>{{ tiempo.TieReaAct }}</td>
-            <td>{{ tiempo.TieReaComAju }}</td>
-            <td>{{ tiempo.TieReaFecReg }}</td>
-            <td>{{ tiempo.TieReaEstReg.EstRegNom }}</td>
-            <td>
-                <a class="btn btn-primary btn-sm" href="{% url 'tiempos_reales_edit' tiempo.pk %}">Modificar</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'tiempos_reales_delete' tiempo.pk %}">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="scrollable-table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Actividad</th>
+                <th>Tiempo Real</th>
+                <th>Comentario Ajuste</th>
+                <th>Fecha de Registro</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tiempo in tiempos %}
+            <tr>
+                <td>{{ tiempo.TieReaCod }}</td>
+                <td>{{ tiempo.TieReaCodAct.ActNom }}</td>
+                <td>{{ tiempo.TieReaAct }}</td>
+                <td>{{ tiempo.TieReaComAju }}</td>
+                <td>{{ tiempo.TieReaFecReg }}</td>
+                <td>{{ tiempo.TieReaEstReg.EstRegNom }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" href="{% url 'tiempos_reales_edit' tiempo.pk %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'tiempos_reales_delete' tiempo.pk %}">Eliminar</a>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'toggle_tiempos_reales_status' tiempo.pk %}">
+                            {% if tiempo.TieReaEstReg.EstRegNom == 'Activo' %}
+                                Inactivar
+                            {% else %}
+                                Activar
+                            {% endif %}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <a class="btn btn-success" href="{% url 'tiempos_reales_add' %}">Adicionar</a>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="mb-4">{{ form.instance.pk|yesno:"Modificar,Adicionar" }}</h2>
+<h2 class="mb-4">{{ title }}</h2>
 <form method="post" class="needs-validation" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
@@ -25,3 +25,13 @@
 {% endif %}
 
 {% endblock %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const idField = document.querySelector("#id_ActCod");
+    if (idField) {
+        const isAddForm = window.location.href.includes("add");
+        idField.readOnly = !isAddForm;
+    }
+});
+</script>

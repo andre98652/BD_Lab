@@ -1,31 +1,42 @@
-{% extends "base.html" %}
+{% extends "gestion_actividades.html" %}
 
-{% block content %}
+{% block gestion_actividades_content %}
 <h2 class="mb-4">Etapas de Proyecto</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Tiempo Estimado</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for etapa in etapas %}
-        <tr>
-            <td>{{ etapa.EtaProCod }}</td>
-            <td>{{ etapa.EtaProNom }}</td>
-            <td>{{ etapa.EtaProTieEst }}</td>
-            <td>{{ etapa.EtaProEstReg.EstRegNom }}</td>
-            <td>
-                <a class="btn btn-primary btn-sm" href="{% url 'etapas_proyecto_edit' etapa.pk %}">Modificar</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'etapas_proyecto_delete' etapa.pk %}">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="scrollable-table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Tiempo Estimado</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for etapa in etapas %}
+            <tr>
+                <td>{{ etapa.EtaProCod }}</td>
+                <td>{{ etapa.EtaProNom }}</td>
+                <td>{{ etapa.EtaProTieEst }}</td>
+                <td>{{ etapa.EtaProEstReg.EstRegNom }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" href="{% url 'etapas_proyecto_edit' etapa.pk %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'etapas_proyecto_delete' etapa.pk %}">Eliminar</a>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'toggle_etapa_proyecto_status' etapa.pk %}">
+                            {% if etapa.EtaProEstReg.EstRegNom == 'Activo' %}
+                                Inactivar
+                            {% else %}
+                                Activar
+                            {% endif %}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <a class="btn btn-success" href="{% url 'etapas_proyecto_add' %}">Adicionar</a>
 {% endblock %}

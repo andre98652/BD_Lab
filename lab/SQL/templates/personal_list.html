@@ -1,41 +1,46 @@
-{% extends "base.html" %}
+{% extends "gestion_personal.html" %}
 
-{% block content %}
-<h2 class="mb-4">Personal</h2>
-<div class="btn-group" role="group">
-    <a class="btn btn-primary" href="{% url 'personal_list' %}">Lista de Personal</a>
-    <a class="btn btn-secondary" href="{% url 'cargo_personal_list' %}">Cargos de Personal</a>
+{% block gestion_personal_content %}
+<h2 class="mb-4">Lista de Personal</h2>
+<div class="scrollable-table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Costo por Hora</th>
+                <th>Fecha de Ingreso</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for personal in personal %}
+            <tr>
+                <td>{{ personal.PerCod }}</td>
+                <td>{{ personal.PerNom }}</td>
+                <td>{{ personal.PerCar.CarPerNom }}</td>
+                <td>{{ personal.PerCosHor }}</td>
+                <td>{{ personal.PerFecIng }}</td>
+                <td>{{ personal.PerEst.EstCliNom }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" href="{% url 'personal_edit' personal.pk %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'personal_delete' personal.pk %}">Eliminar</a>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'toggle_personal_status' personal.pk %}">
+                            {% if personal.PerEst.EstCliNom == 'Activo' %}
+                                Inactivar
+                            {% else %}
+                                Activar
+                            {% endif %}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-<table class="table table-striped mt-4">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Cargo</th>
-            <th>Costo por Hora</th>
-            <th>Fecha de Ingreso</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for personal in personal %}
-        <tr>
-            <td>{{ personal.PerCod }}</td>
-            <td>{{ personal.PerNom }}</td>
-            <td>{{ personal.PerCar.CarPerNom }}</td>
-            <td>{{ personal.PerCosHor }}</td>
-            <td>{{ personal.PerFecIng }}</td>
-            <td>{{ personal.PerEst.EstCliNom }}</td>
-            <td>
-                <div class="btn-group" role="group">
-                    <a class="btn btn-primary btn-sm" href="{% url 'personal_edit' personal.pk %}">Modificar</a>
-                    <a class="btn btn-danger btn-sm" href="{% url 'personal_delete' personal.pk %}">Eliminar</a>
-                </div>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 <a class="btn btn-success" href="{% url 'personal_add' %}">Adicionar</a>
 {% endblock %}

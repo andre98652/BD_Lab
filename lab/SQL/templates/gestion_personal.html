@@ -2,8 +2,12 @@
 
 {% block content %}
 <h2 class="mb-4">Gestión de Personal</h2>
-<div class="btn-group" role="group">
-    <a class="btn btn-primary" href="{% url 'personal_list' %}">Lista de Personal</a>
-    <a class="btn btn-secondary" href="{% url 'cargo_personal_list' %}">Cargos de Personal</a>
+<nav class="navigation mb-4">
+    <a class="btn btn-secondary {% if request.path == '/SQL/personal/list/' %}active{% endif %}" href="{% url 'personal_list' %}">Lista de Personal</a>
+    <a class="btn btn-secondary {% if request.path == '/SQL/cargo_personal/' %}active{% endif %}" href="{% url 'cargo_personal_list' %}">Cargos de Personal</a>
+</nav>
+<div class="centered-box">
+    {% block gestion_personal_content %}
+    {% endblock %}
 </div>
 {% endblock %}

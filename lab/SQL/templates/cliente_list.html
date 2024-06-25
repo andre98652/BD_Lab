@@ -1,47 +1,44 @@
-{% extends "base.html" %}
+{% extends "gestion_clientes.html" %}
 
-{% block content %}
+{% block gestion_clientes_content %}
 <h2 class="mb-4">Clientes</h2>
-<div class="btn-group" role="group">
-    <a class="btn btn-primary" href="{% url 'cliente_list' %}">Lista de Clientes</a>
-    <a class="btn btn-secondary" href="{% url 'estado_cliente_list' %}">Estados de Cliente</a>
-    <a class="btn btn-secondary" href="{% url 'tipo_cliente_list' %}">Tipos de Cliente</a>
+<div class="scrollable-table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Fecha de Ingreso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.CliCod }}</td>
+                <td>{{ cliente.CliNom }}</td>
+                <td>{{ cliente.CliTip.TipCliNom }}</td>
+                <td>{{ cliente.CliEst.EstCliNom }}</td>
+                <td>{{ cliente.CliFecIng }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary btn-sm" href="{% url 'cliente_edit' cliente.pk %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'toggle_cliente_status' cliente.pk %}">
+                            {% if cliente.CliEst.EstCliNom == 'Activo' %}
+                                Inactivar
+                            {% else %}
+                                Activar
+                            {% endif %}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-<table class="table table-striped mt-4">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Fecha de Ingreso</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.CliCod }}</td>
-            <td>{{ cliente.CliNom }}</td>
-            <td>{{ cliente.CliTip.TipCliNom }}</td>
-            <td>{{ cliente.CliEst.EstCliNom }}</td>
-            <td>{{ cliente.CliFecIng }}</td>
-            <td>
-                <div class="btn-group" role="group">
-                    <a class="btn btn-primary btn-sm" href="{% url 'cliente_edit' cliente.pk %}">Modificar</a>
-                    <a class="btn btn-warning btn-sm" href="{% url 'toggle_cliente_status' cliente.pk %}">
-                        {% if cliente.CliEst.EstCliNom == 'Activo' %}
-                            Inactivar
-                        {% else %}
-                            Activar
-                        {% endif %}
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
-                </div>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 <a class="btn btn-success" href="{% url 'cliente_add' %}">Adicionar</a>
 {% endblock %}
